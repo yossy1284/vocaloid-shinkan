@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一橋大学ボーカロイド同好会 | 新歓2026</title>
+  <meta name="description" content="一橋大学ボーカロイド同好会の新歓特設サイト。作曲・DJ・ファン活動など、ボカロを通じていろんな楽しみ方ができるサークルです。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #39c5bb;
+      --primary-dark: #2ba8a0;
+      --accent: #ff6b9d;
+      --bg-dark: #0a0a1a;
+      --bg-card: #12122a;
+      --text: #e8e8f0;
+      --text-muted: #9a9ab0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      background: rgba(10, 10, 26, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(57, 197, 187, 0.15);
+      transition: padding 0.3s;
+    }
+
+    nav.scrolled {
+      padding: 0.5rem 2rem;
+    }
+
+    nav .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--primary);
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    nav .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    nav .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      transition: 0.3s;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(57, 197, 187, 0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(255, 107, 157, 0.1) 0%, transparent 60%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .subtitle {
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .hero .welcome-msg {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: var(--text);
+    }
+
+    .hero .badge {
+      display: inline-block;
+      background: rgba(57, 197, 187, 0.15);
+      border: 1px solid rgba(57, 197, 187, 0.3);
+      border-radius: 999px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.9rem;
+      color: var(--primary);
+      margin-bottom: 2rem;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      padding: 0.9rem 2.5rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(57, 197, 187, 0.3);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(57, 197, 187, 0.45);
+    }
+
+    /* Sections */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+      font-size: 0.95rem;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .about-item {
+      background: var(--bg-card);
+      border: 1px solid rgba(57, 197, 187, 0.1);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .about-item .label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .about-item .value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* Activities */
+    .activities {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .activity-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(57, 197, 187, 0.1);
+      border-radius: 16px;
+      padding: 2.5rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .activity-card:hover {
+      border-color: rgba(57, 197, 187, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .activity-card .icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .activity-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      color: var(--text);
+    }
+
+    .activity-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.9;
+    }
+
+    .activity-card .tags {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .activity-card .tag {
+      background: rgba(57, 197, 187, 0.1);
+      color: var(--primary);
+      padding: 0.2rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+    }
+
+    /* Ichibashi Festival */
+    .festival-card {
+      background: linear-gradient(135deg, rgba(57, 197, 187, 0.1), rgba(255, 107, 157, 0.08));
+      border: 1px solid rgba(255, 107, 157, 0.2);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .festival-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .festival-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.9;
+    }
+
+    /* Events */
+    .events-list {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .event-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      background: var(--bg-card);
+      border: 1px solid rgba(57, 197, 187, 0.1);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      transition: border-color 0.3s;
+    }
+
+    .event-item:hover {
+      border-color: rgba(57, 197, 187, 0.3);
+    }
+
+    .event-date {
+      flex-shrink: 0;
+      text-align: center;
+      min-width: 60px;
+    }
+
+    .event-date .month {
+      font-size: 0.75rem;
+      color: var(--primary);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .event-date .day {
+      font-size: 1.8rem;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .event-info h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .event-info p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .event-badge {
+      display: inline-block;
+      background: rgba(255, 107, 157, 0.15);
+      color: var(--accent);
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+
+    /* Contact */
+    .contact-section {
+      text-align: center;
+      padding: 5rem 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-card);
+      border: 1px solid rgba(57, 197, 187, 0.15);
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(57, 197, 187, 0.1);
+    }
+
+    /* Scroll animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(10, 10, 26, 0.95);
+        backdrop-filter: blur(12px);
+        padding: 1rem 2rem;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(57, 197, 187, 0.15);
+      }
+
+      .nav-links.open {
+        display: flex !important;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .event-item {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .event-date {
+        text-align: left;
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+      }
+
+      .event-date .day {
+        font-size: 1.3rem;
+      }
+
+      section {
+        padding: 3rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="logo">VOCALOID@一橋</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">サークル概要</a></li>
+        <li><a href="#activities">活動内容</a></li>
+        <li><a href="#events">新歓企画</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="メニュー">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-content">
+      <div class="badge">2026 新歓特設サイト</div>
+      <h1>一橋大学<br>ボーカロイド同好会</h1>
+      <p class="subtitle">ボカロ好きが集まる、和気あいあいとした文化系サークル</p>
+      <p class="welcome-msg">新入生の皆さん、ご入学おめでとうございます！</p>
+      <a href="https://lin.ee/MXAVadI" class="cta-btn" target="_blank" rel="noopener">公式LINEに登録する</a>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about">
+    <div class="fade-in">
+      <h2 class="section-title">サークル概要</h2>
+      <p class="section-subtitle">作曲・DJ・ファン活動など、ボカロを通じていろんな楽しみ方ができるサークルです。</p>
+      <div class="about-grid">
+        <div class="about-item">
+          <div class="label">設立</div>
+          <div class="value">2024年</div>
+        </div>
+        <div class="about-item">
+          <div class="label">メンバー</div>
+          <div class="value">20人</div>
+        </div>
+        <div class="about-item">
+          <div class="label">活動頻度</div>
+          <div class="value">週1対面 + Discord</div>
+        </div>
+        <div class="about-item">
+          <div class="label">活動場所</div>
+          <div class="value">大学内の教室</div>
+        </div>
+        <div class="about-item">
+          <div class="label">サークル費</div>
+          <div class="value">年3,000円</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activities -->
+  <section id="activities">
+    <div class="fade-in">
+      <h2 class="section-title">活動内容</h2>
+      <p class="section-subtitle">経験者も初心者もどなたでも大歓迎！大学から創作を始めた人も多くいます。</p>
+      <div class="activities">
+
+        <div class="activity-card fade-in">
+          <div class="icon">🎵</div>
+          <h3>創作活動</h3>
+          <p>ボーカロイドを使用した作曲活動及びイラスト作成を行っています。作曲・イラスト・動画編集を分担した合作の作成や、ボカコレというボカロ楽曲投稿祭への参加などを行っています。</p>
+          <p>サークルメンバーと絵チャットやGartic Phoneで遊ぶことも！創作活動を大学から始めた人も多くいるので、経験者初心者問わず大歓迎です！</p>
+          <div class="tags">
+            <span class="tag">作曲</span>
+            <span class="tag">イラスト</span>
+            <span class="tag">動画編集</span>
+            <span class="tag">ボカコレ</span>
+          </div>
+        </div>
+
+        <div class="activity-card fade-in">
+          <div class="icon">🎧</div>
+          <h3>DJ活動</h3>
+          <p>ボーカロイド楽曲（合成音声を使用した楽曲）をメインにDJをしています。一橋祭でのパフォーマンスやボーカロイドクラブイベント（ボカクラ）での出演・主催をしています。</p>
+          <p>学生団体 #crossnotes では、ジャンルを問わずDJイベントの出演や参加、他大との交流などが可能です。興味のある方はぜひDJ班にお越しください！</p>
+          <div class="tags">
+            <span class="tag">#多摩ロイド（主催イベント）</span>
+            <span class="tag">#crossnotes</span>
+            <span class="tag">ボカクラ</span>
+          </div>
+        </div>
+
+        <div class="activity-card fade-in">
+          <div class="icon">🎤</div>
+          <h3>ファン活動</h3>
+          <p>カラオケ会やご飯会などを通して、サークル員の親睦を深めています。昨年度は新歓期間のカラオケ会、忘年会や新年会などを行いました！</p>
+          <p>サークル員同士でライブやコラボイベントに参戦したり、お気に入りの楽曲を布教する布教会も行っています。マジカルミライやボーマス、各地のボカクラやニコニコ超会議などに参戦！</p>
+          <div class="tags">
+            <span class="tag">カラオケ</span>
+            <span class="tag">ライブ参戦</span>
+            <span class="tag">布教会</span>
+            <span class="tag">ニコ超</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="festival-card fade-in">
+        <h3>🏫 一橋祭</h3>
+        <p>一橋祭ではオリジナルドリンクの提供や謎解き企画などの実施に加え、DJイベント「#ボカバシ」を開催しました。サークル員によるDJプレイの他、豪華なゲストDJをお呼びして大盛況のイベントになりました！</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events -->
+  <section id="events">
+    <div class="fade-in">
+      <h2 class="section-title">新歓企画</h2>
+      <p class="section-subtitle">ボカロ好きの皆さん、ぜひお越しください！</p>
+      <div class="events-list">
+
+        <div class="event-item fade-in">
+          <div class="event-date">
+            <div class="month">APR</div>
+            <div class="day">3</div>
+          </div>
+          <div class="event-info">
+            <h4>カラオケ会 <span class="event-badge">参加費 500円</span></h4>
+            <p>📍 歌広場国分寺店 ／ 🕐 16:00〜20:00（その後任意でご飯会）</p>
+            <p>集合：国分寺駅北口 14:50 ／ 途中退出・途中参加OK</p>
+          </div>
+        </div>
+
+        <div class="event-item fade-in">
+          <div class="event-date">
+            <div class="month">APR</div>
+            <div class="day">16</div>
+          </div>
+          <div class="event-info">
+            <h4>DJ体験会 <span class="event-badge">参加費 無料</span></h4>
+            <p>集合：一橋大学西門 ／ 途中退出・途中参加OK</p>
+          </div>
+        </div>
+
+        <div class="event-item fade-in">
+          <div class="event-date">
+            <div class="month">APR</div>
+            <div class="day">25-26</div>
+          </div>
+          <div class="event-info">
+            <h4>ニコニコ超会議</h4>
+            <p>サークルメンバーと一緒に参戦！詳細は公式LINEにて</p>
+          </div>
+        </div>
+
+        <div class="event-item fade-in">
+          <div class="event-date">
+            <div class="month">MAY</div>
+            <div class="day">10</div>
+          </div>
+          <div class="event-info">
+            <h4>カラオケ会 <span class="event-badge">参加費 500円</span></h4>
+            <p>📍 歌広場国分寺店 ／ 🕐 16:00〜20:00（その後任意でご飯会）</p>
+            <p>集合：国分寺駅北口 14:50 ／ 途中退出・途中参加OK</p>
+          </div>
+        </div>
+
+        <div class="event-item fade-in">
+          <div class="event-date">
+            <div class="month">MAY</div>
+            <div class="day">16</div>
+          </div>
+          <div class="event-info">
+            <h4>DJ体験会 <span class="event-badge">参加費 無料</span></h4>
+            <p>集合：一橋大学西門 ／ 途中退出・途中参加OK</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact-section">
+    <div class="fade-in">
+      <h2 class="section-title">お問い合わせ・登録</h2>
+      <p class="section-subtitle">公式LINEで詳しい情報を発信中！気軽に登録してください。</p>
+      <div class="contact-links">
+        <a href="https://lin.ee/MXAVadI" class="contact-link" target="_blank" rel="noopener">
+          💬 公式LINE
+        </a>
+        <a href="https://x.com/hit_u_vocaloid" class="contact-link" target="_blank" rel="noopener">
+          𝕏 @hit_u_vocaloid
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 一橋大学ボーカロイド同好会</p>
+  </footer>
+
+  <script>
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Navbar shrink on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
